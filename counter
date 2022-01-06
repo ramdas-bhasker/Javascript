@@ -1,0 +1,49 @@
+<html>
+<style>
+body {
+	background-color: #8e44ad;
+	color: #fff;
+	font-family: 'Roboto Mono', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+}
+
+.counter {
+	font-size: 60px;
+	margin-top: 30px;
+}
+</style>
+   <body>
+      <div class="counter" data-target="12000"></div>
+<span>Twitter Followers</span>
+
+<!-- <div class="counter" data-target="3000"></div> -->
+<!-- <span>YouTube Subscribers</span> -->
+   </body>
+   <script type="text/javascript">
+	const counters = document.querySelectorAll('.counter');
+	
+	counters.forEach(counterText => {
+		counterText.innerText = '0';
+		
+		const updateCounter = () => {
+			const dataTarget = +counterText.getAttribute('data-target');
+			const increaseNumber = +counterText.innerText;
+			const increment = Math.random() * 100;
+			
+			if(increaseNumber < dataTarget){
+				counterText.innerText = Math.ceil(increaseNumber + increment);
+				setTimeout(updateCounter, 1)
+			}else{
+				counterText.innerText = dataTarget;
+			}
+		}
+		updateCounter();
+	})
+	
+   </script>
+</html>

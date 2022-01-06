@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" index="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" index="ie=edge">
+    <title>Sample Work</title>
+	
+	<style>
+		#nav.active{display:block !important}
+		#popup-container{
+			position:absolute;
+			background-color:rgba(0,0,0,0.2);
+			display:none;
+		}
+		.popup{
+			background:#f1f1f1;
+			width:100px;
+			height:100px;
+		}
+		#popup-container.active{
+			display:flex;
+		}
+	</style>
+</head>
+
+<body>
+<div>
+	<button id="btn">button</button>
+	<ul id="nav" style="display:none;">
+		<li>01</li>
+		<li>02</li>
+		<li>03</li>
+	</ul>
+</div>
+<script>
+	const btns = document.getElementById('btn');
+	const navs = document.getElementById('nav');
+	btns.addEventListener('click', () => {
+		navs.classList.toggle('active');
+	})
+</script>
+
+
+<button id="btnNot">Notification</button>
+<div id="notfCon"></div>
+<script>
+const btnNotf = document.getElementById('btnNot');
+const notf = document.getElementById('notfCon');
+btnNotf.addEventListener('click', () => {
+	notificationDiv()
+})
+	function notificationDiv(){
+		const notifDiv = document.createElement('div');
+		notifDiv.innerText = 'Bhasker';
+		notf.appendChild(notifDiv);
+		setTimeout(() => {
+			notifDiv.remove();
+		}, 2000)
+	}
+	
+</script>
+
+<p id="contentBox"></p>
+<script>
+const text = "HTML elements often contains text. To create a button with text";
+
+let content = 0;
+function contentText(){
+	document.getElementById('contentBox').innerText = text.slice(0, content);
+	content ++;
+	if(content > text.length){
+		content = 0;
+	}
+}
+setInterval(contentText, 40);
+</script>
+<button id="open">+</button>
+
+<div id="popup-container"><div class="popup"><button id="close">X</button></div></div>
+<script>
+let open = document.getElementById('open');
+let close = document.getElementById('close');
+let popupContainer = document.getElementById('popup-container');
+	open.addEventListener('click', () => {
+		popupContainer.classList.add('active');
+	})
+	close.addEventListener('click', () => {
+		popupContainer.classList.remove('active');
+	})
+</script>
+<style>
+#heart-box {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction:column;
+}
+.hearts{
+	color:red; 
+	animation: fall linear 50s;
+	transform:translateY(0px);
+	margin-bottom:50px;
+	position:fixed;
+	top:-1px;
+}
+@keyframe fall(
+	to{
+		transform:translateY(105vh);
+	}
+)
+</style>
+
+<div id="heart-box"></div>
+
+<script>
+function createHeart(){
+	const heart = document.createElement('p');
+	heart.classList.add('hearts');
+	heart.innerText="$";
+	document.getElementById('heart-box').appendChild(heart);
+	hearts.style.left= math.random() * 100 + "vw";
+}
+setInterval(createHeart, 200);
+
+
+</script>
+</body>
+</html>

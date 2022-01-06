@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" index="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" index="ie=edge">
+    <title>Quiz</title>
+	
+	
+<style>
+.none{display:none;}
+</style>
+</head>
+
+<body>
+
+
+<div class="question" id="quest">Question Heare?</div>
+<div class="form-check mb-3">
+	<input class="form-check-input" type="radio" name="remember" id="ans1">
+    <label class="form-check-label" for="ans1" id="opetion1">
+       Remember me
+    </label>
+  </div>
+<div class="form-check mb-3">
+	<input class="form-check-input" type="radio" name="remember" id="ans2">
+    <label class="form-check-label" for="ans2" id="opetion2">
+       Remember me
+    </label>
+  </div>
+<div class="form-check mb-3">
+	<input class="form-check-input" type="radio" name="remember" id="ans3">
+    <label class="form-check-label" for="ans3" id="opetion3">
+       Remember me
+    </label>
+  </div>
+<div class="form-check mb-3">
+	<input class="form-check-input" type="radio" name="remember" id="ans4">
+    <label class="form-check-label" for="ans4" id="opetion4">
+       Remember me
+    </label>
+  </div>
+  <button id="submit" class="btn btn-success">Submit</button>
+  <div id="showDet"></div>
+  
+<script>
+const quiz = [
+       {
+            "question"      :   "Q1: Who came up with the theory of relativity?",
+            "choices"       :   [
+                                    "Sir Isaac Newton",
+                                    "Nicolaus Copernicus",
+                                    "Albert Einstein",
+                                    "Ralph Waldo Emmerson"
+                                ],
+            "correct"       :   "Albert Einstein",
+        },
+        {
+            "question"      :   "Q2: Who is on the two dollar bill?",
+            "choices"       :   [
+                                    "Thomas Jefferson",
+                                    "Dwight D. Eisenhower",
+                                    "Benjamin Franklin",
+                                    "Abraham Lincoln"
+                                ],
+            "correct"       :   "Thomas Jefferson",
+        },
+        {
+            "question"      :   "Q3: What event began on April 12, 1861?",
+            "choices"       :   [
+                                    "First manned flight",
+                                    "California became a state",
+                                    "American Civil War began",
+                                    "Declaration of Independence"
+                                ],
+            "correct"       :   "American Civil War began",
+        },
+    ];
+
+const questions = document.getElementById('quest');
+const option1 = document.getElementById('opetion1');
+const option2 = document.getElementById('opetion2');
+const option3 = document.getElementById('opetion3');
+const option4 = document.getElementById('opetion4');
+const submit = document.getElementById('submit');
+const answers = document.querySelectorAll('.form-check-input');
+const showScore = document.getElementById('showDet');
+
+let questionCount = 0;
+let score = 0;
+
+const loadQuestion = () => {
+	const questionList = quiz[questionCount];
+	questions.innerText = questionList.question;
+	
+	option1.innerText = questionList.choices[0];
+	option2.innerText = questionList.choices[1];
+	option3.innerText = questionList.choices[2];
+	option4.innerText = questionList.choices[3];
+}
+	
+loadQuestion();
+ 
+ const getCheckAnswer = () => {
+	let answer;
+	
+	answers.forEach((curAnsElem) => {
+		if(curAnsElem.checked){
+			var cur_lable = curAnsElem.nextElementSibling.innerText;
+			answer = cur_lable;
+			console.log(answer);
+		}
+	});
+	return answer;
+ };
+ 
+ submit.addEventListener('click', () => {
+	const checkedAnswer = getCheckAnswer();
+		
+	if(checkedAnswer == quiz[questionCount].correct){
+		score++;
+	};
+	questionCount++;
+	
+	if(questionCount < quiz.length){
+		loadQuestion();
+	}else{
+	showScore.innerText = score;
+
+		showScore.innerHTML = `<h3> ${score} / ${quiz.length} </h3> <button onclick="location.reload()">reload</button>`;
+		//showScore.classList.remove('none');
+		questionCount = 0;
+		submit.remove();
+	};
+ });
+ 
+</script>	
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #111;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+#container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	max-width: 400px;
+}
+
+.square {
+	background-color: #1d1d1d;
+	box-shadow: 0 0 2px #000;
+	margin: 2px;
+	width: 16px;
+	height: 16px;
+	transition: 2s ease;
+}
+
+.square:hover {
+	transition-duration: 0s;
+}
+</style>
+   <body>
+      <div id="container"></div>
+   </body>
+   <script type="text/javascript">
+	const container = document.getElementById('container');
+	const squareBox = 500;
+	const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71']
+	
+	for(i=0; i<squareBox; i++){
+		const squareBlock = document.createElement('div');
+		squareBlock.classList.add('square');
+		container.appendChild(squareBlock)
+		
+		squareBlock.addEventListener('mouseover', getColors);
+		squareBlock.addEventListener('mouseout', removeColors);
+		
+		function getColors(){
+			colorMore = randomColors();
+			squareBlock.style.background = colorMore;
+			//console.log(squareBlock);
+		}
+		
+		function randomColors(){
+			return colors[Math.floor(Math.random() * colors.length)];
+		}
+		
+		function removeColors(){
+			squareBlock.style.background ='#1d1d1d';
+		}
+	}
+   </script>
+</html>
